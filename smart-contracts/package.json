@@ -1,0 +1,6 @@
+{
+  "name": "cryptotrees-contracts",
+  "version": "1.0.0",
+  "description": "The smart contracts for the CryptoTrees app",
+  "main": "index.js"
+}
