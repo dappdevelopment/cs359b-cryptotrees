@@ -1,4 +1,4 @@
-pragma solidity ^0.4.15;
+pragma solidity ^0.4.21;
 
 import "./Ownable.sol";
 import "./BasicERC721.sol";
@@ -22,7 +22,7 @@ contract CryptoTrees is BasicERC721, Ownable {
     uint[] public existingIds;
 
     // TODO remove _metadata arg, generate genome randomly
-    function growNewTree(address beneficiary, uint tokenId_unused, string _metadata) public {
+    function growNewTree(address beneficiary, string _metadata) public {
         uint tokenId = totalTokens + 1;
         //require(tokenOwner[tokenId] == 0);
         //require(tokenId != 0); // This would break a lot of our logic downstream
@@ -72,7 +72,7 @@ contract CryptoTrees is BasicERC721, Ownable {
         //      ~40% chance the inviter mints a new token
         //      ~10% chance the invitee mints a new token
         //      ~50% chance nothing happens
-        uint randomNumber = uint(block.blockhash(block.number-1)) % 100 + 1;
+        uint randomNumber = uint(blockhash(block.number-1)) % 100 + 1;
         if (randomNumber <= 40) {
             spawnChild(inviterId, inviteeId, msg.sender);
         } else if (randomNumber <= 50) {
@@ -90,7 +90,7 @@ contract CryptoTrees is BasicERC721, Ownable {
         return trees[id].genome;
     }
 
-    function spawnChild(uint parent1Id, uint parent2Id, address childOwner) {
+    function spawnChild(uint parent1Id, uint parent2Id, address childOwner) public {
         // 1. Compute the characteristics of the new tree
         // 2. Mint the new token
         // 3. Give it to the childOwner
@@ -99,7 +99,7 @@ contract CryptoTrees is BasicERC721, Ownable {
     /**
      * Get all trees that are not currently hungover:
      */
-    function availableToParty() public returns (uint[]) {
+    function availableToParty() public view returns (uint[]) {
         uint[] memory result = new uint[](totalTokens);
         uint counter = 0;
         for (uint i = 0; i < totalTokens; i++) {
@@ -112,7 +112,7 @@ contract CryptoTrees is BasicERC721, Ownable {
         return result;
     }
 
-    function allTrees() public returns (uint[]) {
+    function allTrees() public view returns (uint[]) {
         return existingIds;
     }
 

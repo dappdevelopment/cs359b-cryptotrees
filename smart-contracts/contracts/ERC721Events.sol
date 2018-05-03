@@ -1,4 +1,4 @@
-pragma solidity ^0.4.0;
+pragma solidity ^0.4.21;
 
 contract ERC721Events {
     event Created(uint tokenId, address owner, string metadata);

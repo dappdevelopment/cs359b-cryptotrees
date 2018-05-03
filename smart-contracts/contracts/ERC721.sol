@@ -1,13 +1,13 @@
-pragma solidity ^0.4.15;
+pragma solidity ^0.4.21;
 
 contract ERC721 {
-    function totalSupply() constant returns (uint);
-    function balanceOf(address) constant returns (uint);
+    function totalSupply() constant public returns (uint);
+    function balanceOf(address) constant public returns (uint);
 
-    function ownerOf(uint tokenId) constant returns (address);
+    function ownerOf(uint tokenId) constant public returns (address);
 
-    function transfer(address to, uint tokenId);
-    function takeOwnership(uint tokenId);
-    function transferFrom(address to, uint tokenId);
-    function approve(address beneficiary, uint tokenId);
+    function transfer(address to, uint tokenId) public;
+    function takeOwnership(uint tokenId) public;
+    function transferFrom(address to, uint tokenId) public;
+    function approve(address beneficiary, uint tokenId) public;
 }

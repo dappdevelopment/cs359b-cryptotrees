@@ -1,4 +1,4 @@
-pragma solidity ^0.4.15;
+pragma solidity ^0.4.21;
 
 import "./ERC721.sol";
 import "./ERC721Events.sol";
@@ -88,7 +88,7 @@ contract BasicERC721 is ERC721, ERC721Events {
         _clearApproval(tokenId);
         _removeTokenFrom(from, tokenId);
         _addTokenTo(to, tokenId);
-        Transferred(tokenId, from, to);
+        emit Transferred(tokenId, from, to);
     }
 
     function _sell(address from, address to, uint tokenId, uint price) internal {
